@@ -1,50 +1,244 @@
 <div>
-
-    <div class="container py-5">
-        <div class="row mb-4">
-            <div class="col-lg-8 mx-auto text-center">
-                <h1 class="display-6">Donation Form</h1>
-            </div>
-        </div> 
-        <div class="row">
-            <div class="col-lg-6 mx-auto">
-                <div class="card ">
-                    <div class="card-header">
-                        
-                        <div class="tab-content">
-                            <div id="credit-card" class="tab-pane fade show active pt-3">
-                                <form role="form" onsubmit="event.preventDefault()" >
-                                    <div class="form-group"> <label for="username">
-                                            <h6>Card Owner</h6>
-                                        </label> <input type="text" name="username" placeholder="Card Owner Name" required class="form-control "> </div>
-                                    <div class="form-group"> <label for="cardNumber">
-                                            <h6>Card number</h6>
-                                        </label>
-                                        <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control " required></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            <div class="form-group"> <label><span class="hidden-xs">
-                                                        <h6>Expiration Date</h6>
-                                                    </span></label>
-                                                <div class="input-group"> <input type="number" placeholder="MM" name="" class="form-control" required> <input type="number" placeholder="YY" name="" class="form-control" required> </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
-                                                    <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
-                                                </label> <input type="text" required class="form-control"> </div>
-                                        </div>
-                                    </div>
-                                    <div> <input type="number" placeholder="How Much you want to donate" name="" class="form-control" required> </div>
-                                    <div class="card-footer"> <button type="button" class="subscribe btn btn-primary btn-block shadow-sm"> Donate </button> </div>
-                                </form>
-                            </div>
-                        </div> 
+  <div class="container py-5">
+    <div class="row mb-4">
+      <div class="col-lg-8 mx-auto text-center">
+        <h1 class="display-6">Donation Form</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 mx-auto">
+        <div class="card">
+          <div class="card-header">
+            <div class="tab-content">
+              <div id="credit-card" class="tab-pane fade show active pt-3">
+                <form [formGroup]="form" (ngSubmit)="submit()">
+                  <div class="form-group">
+                    <label for="cardOwner">
+                      <h6>Card Owner</h6>
+                    </label>
+                    <input
+                      formControlName="cardOwner"
+                      type="text"
+                      id="cardOwner"
+                      placeholder="Card Owner Name"
+                      required
+                      class="form-control"
+                    />
+                    <div
+                      *ngIf="f['cardOwner'].touched && f['cardOwner'].invalid"
+                      class="alert alert-danger"
+                    >
+                      <div
+                        *ngIf="
+                          f['cardOwner'].errors &&
+                          f['cardOwner'].errors['required']
+                        "
+                      >
+                        Name is required.
+                      </div>
+                      <div
+                        *ngIf="
+                          f['cardOwner'].errors &&
+                          f['cardOwner'].errors['minlength']
+                        "
+                      >
+                        Please Enter The Name on The Card
+                      </div>
                     </div>
-                </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="cardNumber">
+                      <h6>Card number</h6>
+                    </label>
+                    <input
+                      formControlName="cardNumber"
+                      type="number"
+                      id="cardNumber"
+                      placeholder="Valid card number"
+                      class="form-control"
+                      required
+                    />
+                    <div
+                      *ngIf="f['cardNumber'].touched && f['cardNumber'].invalid"
+                      class="alert alert-danger"
+                    >
+                      <div
+                        *ngIf="
+                          f['cardNumber'].errors &&
+                          f['cardNumber'].errors['required']
+                        "
+                      >
+                        Card Number is required.
+                      </div>
+                      <div
+                        *ngIf="
+                          f['cardNumber'].errors &&
+                          f['cardNumber'].errors['min']
+                        "
+                      >
+                        Please Enter The 16-digits on The Card
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="form-group">
+                        <label>
+                          <span class="hidden-xs">
+                            <h6>Expiration Date</h6></span
+                          >
+                        </label>
+                        <div class="input-group">
+                          <input
+                            formControlName="ExpDateMM"
+                            type="number"
+                            placeholder="MM"
+                            name="ExpDateMM"
+                            class="form-control"
+                            required
+                          />
+                          <div
+                            *ngIf="
+                              f['ExpDateMM'].touched && f['ExpDateMM'].invalid
+                            "
+                            class="alert alert-danger"
+                          >
+                            <div
+                              *ngIf="
+                                f['ExpDateMM'].errors &&
+                                f['ExpDateMM'].errors['required']
+                              "
+                            >
+                              Expiration month is required.
+                            </div>
+                            <div
+                              *ngIf="
+                                f['ExpDateMM'].errors &&
+                                f['ExpDateMM'].errors['min']
+                              "
+                            >
+                              Please Enter The Expiration month.
+                            </div>
+                          </div>
+
+                          <input
+                            formControlName="ExpDateYY"
+                            type="number"
+                            placeholder="YY"
+                            name="ExpDateYY"
+                            class="form-control"
+                            required
+                            minlength="2"
+                          />
+                          <div
+                            *ngIf="
+                              f['ExpDateYY'].touched && f['ExpDateYY'].invalid
+                            "
+                            class="alert alert-danger"
+                          >
+                            <div
+                              *ngIf="
+                                f['ExpDateYY'].errors &&
+                                f['ExpDateYY'].errors['required']
+                              "
+                            >
+                              Expiration year is required.
+                            </div>
+                            <div
+                              *ngIf="
+                                f['ExpDateYY'].errors &&
+                                f['ExpDateYY'].errors['min']
+                              "
+                            >
+                              Please Enter The Expiration year.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="form-group mb-4">
+                        <label
+                          data-toggle="tooltip"
+                          title="Three digit CV code on the back of your card"
+                        >
+                          <h6>CVV</h6>
+                        </label>
+                        <input
+                          formControlName="CVV"
+                          type="number"
+                          placeholder="CVV"
+                          required
+                          class="form-control"
+                          minlength="3"
+                        />
+                        <div
+                          *ngIf="f['CVV'].touched && f['CVV'].invalid"
+                          class="alert alert-danger"
+                        >
+                          <div
+                            *ngIf="
+                              f['CVV'].errors && f['CVV'].errors['required']
+                            "
+                          >
+                            CVV is required.
+                          </div>
+                          <div
+                            *ngIf="f['CVV'].errors && f['CVV'].errors['min']"
+                          >
+                            Please Enter Three digit CV code on the back of your
+                            card.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <input
+                      formControlName="amount"
+                      type="number"
+                      placeholder="How Much you want to donate"
+                      name="amount"
+                      class="form-control"
+                      required
+                    />
+                    <div
+                      *ngIf="f['amount'].touched && f['amount'].invalid"
+                      class="alert alert-danger"
+                    >
+                      <div
+                        *ngIf="
+                          f['amount'].errors && f['amount'].errors['required']
+                        "
+                      >
+                        Amount is required.
+                      </div>
+                      <div
+                        *ngIf="f['amount'].errors && f['amount'].errors['min']"
+                      >
+                        Please Enter The amount.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card-footer">
+                    <button
+                      type="submit"
+                      class="subscribe btn btn-primary btn-block shadow-sm"
+                      [disabled]="form.invalid"
+                    >
+                      Donate
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
+          </div>
         </div>
-
-
+      </div>
+    </div>
+  </div>
 </div>
