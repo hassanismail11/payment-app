@@ -17,9 +17,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './donation-page.component.css',
 })
 export class DonationPageComponent {
-  http = inject(HttpClient);
 
-  res: any;
+  showSuccessMessage = false;
+
+  http = inject(HttpClient);
 
   form = new FormGroup({
     cardOwner: new FormControl('', [
@@ -29,6 +30,7 @@ export class DonationPageComponent {
     cardNumber: new FormControl('', [
       Validators.required,
       Validators.min(999999999999999),
+      Validators.max(9999999999999999),
     ]),
     ExpDateMM: new FormControl('', [
       Validators.required,
@@ -49,13 +51,18 @@ export class DonationPageComponent {
   }
 
   submit() {
+    this.showSuccessMessage = false;
     this.http
       .post('http://127.0.0.1:8000/cards', this.form.value)
-      .subscribe((res: any) => {
-        console.log(res);
-        this.res = res;
-      });
-
-    //console.log(this.form.value);
+      .subscribe(
+        res => {
+          console.log(res);
+          this.form.reset();
+          this.showSuccessMessage = true;
+        },
+        err => {
+          console.error(err);
+        }
+      );
   }
 }

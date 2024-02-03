@@ -8,7 +8,6 @@ import { Component, OnInit, inject } from '@angular/core';
   templateUrl: './about-page.component.html',
   styleUrl: './about-page.component.css',
 })
-
 export class AboutPageComponent implements OnInit {
   http = inject(HttpClient);
   cards: any = [];
@@ -18,10 +17,13 @@ export class AboutPageComponent implements OnInit {
   }
 
   fetchCards() {
-    this.http.get('http://127.0.0.1:8000/cards')
-    .subscribe((cards: any) => {
-      //console.log(cards);
-      this.cards = cards;
-    });
+    this.http.get('http://127.0.0.1:8000/cards').subscribe(
+      (res) => {
+        this.cards = res;
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 }
