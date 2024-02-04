@@ -23,25 +23,18 @@ export class DonationPageComponent {
   http = inject(HttpClient);
 
   form = new FormGroup({
-    cardOwner: new FormControl('', [
+    name: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
     ]),
-    cardNumber: new FormControl('', [
+    email: new FormControl('', [
       Validators.required,
-      Validators.min(999999999999999),
-      Validators.max(9999999999999999),
+      Validators.minLength(5),
     ]),
-    ExpDateMM: new FormControl('', [
+    phoneNumber: new FormControl('', [
       Validators.required,
-      Validators.min(1),
-      Validators.max(12),
-    ]),
-    ExpDateYY: new FormControl('', [Validators.required, Validators.min(1)]),
-    CVV: new FormControl('', [
-      Validators.required,
-      Validators.min(99),
-      Validators.max(999),
+      Validators.min(999999999),
+      Validators.max(9999999999),
     ]),
     amount: new FormControl('', [Validators.required, Validators.min(1)]),
   });
