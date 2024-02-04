@@ -20,7 +20,3 @@ Route::get('/', function () {
 
 Route::get('/cards', [Cards::class,'index']);
 Route::post('/cards', [Cards::class,'store']);
-
-Route::get('/', 'App\Http\Controllers\StripeController@checkout')->name('checkout');
-Route::post('/session', 'App\Http\Controllers\StripeController@session')->name('session');
-Route::get('/success', 'App\Http\Controllers\StripeController@success')->name('success');
