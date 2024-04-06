@@ -7,20 +7,18 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Card Owner</th>
-              <th scope="col">Card Number</th>
-              <th scope="col">Exp Date</th>
-              <th scope="col">CVV</th>
+              <th scope="col">Name</th>
+              <th scope="col">E-mail</th>
+              <th scope="col">Phone Number</th>
               <th scope="col">Amount</th>
             </tr>
           </thead>
           <tbody>
             @for(card of cards; track card.cardOwner){
             <tr>
-              <td>{{ card.cardOwner }}</td>
-              <td>{{ card.cardNumber }}</td>
-              <td>{{ card.ExpDateMM }} / {{ card.ExpDateYY }}</td>
-              <td>{{ card.CVV }}</td>
+              <td>{{ card.name }}</td>
+              <td>{{ card.email }}</td>
+              <td>{{ card.phoneNumber }}</td>
               <td>{{ card.amount }}</td>
             </tr>
             }

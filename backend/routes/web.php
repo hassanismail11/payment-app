@@ -24,7 +24,3 @@ Route::get('/s1', [Cards::class,'s1']);
 Route::get('/s2', [Cards::class,'s2']);
 Route::get('/s3', [Cards::class,'s3']);
 Route::get('/all', [Cards::class,'all']);
-
-Route::get('/', 'App\Http\Controllers\StripeController@checkout')->name('checkout');
-Route::post('/session', 'App\Http\Controllers\StripeController@session')->name('session');
-Route::get('/success', 'App\Http\Controllers\StripeController@success')->name('success');

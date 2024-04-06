@@ -13,189 +13,110 @@
               <div id="credit-card" class="tab-pane fade show active pt-3">
                 <form [formGroup]="form" (ngSubmit)="submit()">
                   <div class="form-group">
-                    <label for="cardOwner">
-                      <h6>Card Owner</h6>
+                    <label for="name">
+                      <h6>Name</h6>
                     </label>
                     <input
-                      formControlName="cardOwner"
+                      formControlName="name"
                       type="text"
-                      id="cardOwner"
-                      placeholder="Card Owner Name"
+                      id="name"
+                      placeholder="Your Name"
                       required
                       class="form-control"
                     />
                     <div
-                      *ngIf="f['cardOwner'].touched && f['cardOwner'].invalid"
+                      *ngIf="f['name'].touched && f['name'].invalid"
                       class="alert alert-danger"
                     >
                       <div
-                        *ngIf="
-                          f['cardOwner'].errors &&
-                          f['cardOwner'].errors['required']
-                        "
+                        *ngIf="f['name'].errors && f['name'].errors['required']"
                       >
                         Name is required.
                       </div>
                       <div
                         *ngIf="
-                          f['cardOwner'].errors &&
-                          f['cardOwner'].errors['minlength']
+                          f['name'].errors && f['name'].errors['minlength']
                         "
                       >
-                        Please Enter The Name on The Card
+                        Please Enter Your Name.
                       </div>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="cardNumber">
-                      <h6>Card number</h6>
+                    <label for="email">
+                      <h6>E-mail</h6>
                     </label>
                     <input
-                      formControlName="cardNumber"
-                      type="number"
-                      id="cardNumber"
-                      placeholder="Valid card number"
-                      class="form-control"
+                      ngModel
+                      email
+                      formControlName="email"
+                      type="email"
+                      id="email"
+                      placeholder="Your E-mail"
                       required
+                      class="form-control"
                     />
                     <div
-                      *ngIf="f['cardNumber'].touched && f['cardNumber'].invalid"
+                      *ngIf="f['email'].touched && f['email'].invalid"
                       class="alert alert-danger"
                     >
                       <div
                         *ngIf="
-                          f['cardNumber'].errors &&
-                          f['cardNumber'].errors['required']
+                          f['email'].errors && f['email'].errors['required']
                         "
                       >
-                        Card Number is required.
+                        Email is required.
                       </div>
                       <div
                         *ngIf="
-                          f['cardNumber'].errors &&
-                          f['cardNumber'].errors['min']
+                          f['email'].errors && f['email'].errors['minlength']
                         "
                       >
-                        Please Enter The 16-digits on The Card
+                        Please Enter Your E-mail.
                       </div>
                     </div>
                   </div>
 
-                  <div class="row">
-                    <div class="col-sm-8">
-                      <div class="form-group">
-                        <label>
-                          <span class="hidden-xs">
-                            <h6>Expiration Date</h6></span
-                          >
-                        </label>
-                        <div class="input-group">
-                          <input
-                            formControlName="ExpDateMM"
-                            type="number"
-                            placeholder="MM"
-                            name="ExpDateMM"
-                            class="form-control"
-                            required
-                          />
-                          <div
-                            *ngIf="
-                              f['ExpDateMM'].touched && f['ExpDateMM'].invalid
-                            "
-                            class="alert alert-danger"
-                          >
-                            <div
-                              *ngIf="
-                                f['ExpDateMM'].errors &&
-                                f['ExpDateMM'].errors['required']
-                              "
-                            >
-                              Expiration month is required.
-                            </div>
-                            <div
-                              *ngIf="
-                                f['ExpDateMM'].errors &&
-                                f['ExpDateMM'].errors['min']
-                              "
-                            >
-                              Please Enter The Expiration month.
-                            </div>
-                          </div>
-
-                          <input
-                            formControlName="ExpDateYY"
-                            type="number"
-                            placeholder="YY"
-                            name="ExpDateYY"
-                            class="form-control"
-                            required
-                            minlength="2"
-                          />
-                          <div
-                            *ngIf="
-                              f['ExpDateYY'].touched && f['ExpDateYY'].invalid
-                            "
-                            class="alert alert-danger"
-                          >
-                            <div
-                              *ngIf="
-                                f['ExpDateYY'].errors &&
-                                f['ExpDateYY'].errors['required']
-                              "
-                            >
-                              Expiration year is required.
-                            </div>
-                            <div
-                              *ngIf="
-                                f['ExpDateYY'].errors &&
-                                f['ExpDateYY'].errors['min']
-                              "
-                            >
-                              Please Enter The Expiration year.
-                            </div>
-                          </div>
-                        </div>
+                  <div class="form-group">
+                    <label for="phoneNumber">
+                      <h6>Phone</h6>
+                    </label>
+                    <input
+                      formControlName="phoneNumber"
+                      type="number"
+                      id="phoneNumber"
+                      placeholder="Your phone number"
+                      class="form-control"
+                      required
+                    />
+                    <div
+                      *ngIf="
+                        f['phoneNumber'].touched && f['phoneNumber'].invalid
+                      "
+                      class="alert alert-danger"
+                    >
+                      <div
+                        *ngIf="
+                          f['phoneNumber'].errors &&
+                          f['phoneNumber'].errors['required']
+                        "
+                      >
+                        Phone Number is required.
                       </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                      <div class="form-group mb-4">
-                        <label
-                          data-toggle="tooltip"
-                          title="Three digit CV code on the back of your card"
-                        >
-                          <h6>CVV</h6>
-                        </label>
-                        <input
-                          formControlName="CVV"
-                          type="number"
-                          placeholder="CVV"
-                          required
-                          class="form-control"
-                          minlength="3"
-                        />
-                        <div
-                          *ngIf="f['CVV'].touched && f['CVV'].invalid"
-                          class="alert alert-danger"
-                        >
-                          <div
-                            *ngIf="
-                              f['CVV'].errors && f['CVV'].errors['required']
-                            "
-                          >
-                            CVV is required.
-                          </div>
-                          <div
-                            *ngIf="f['CVV'].errors && f['CVV'].errors['min']"
-                          >
-                            Please Enter Three digit CV code on the back of your
-                            card.
-                          </div>
-                        </div>
+                      <div
+                        *ngIf="
+                          f['phoneNumber'].errors &&
+                          f['phoneNumber'].errors['min']
+                        "
+                      >
+                        Please Enter Phone Number
                       </div>
                     </div>
                   </div>
+
+                  <hr />
+
                   <div>
                     <input
                       formControlName="amount"
@@ -232,9 +153,13 @@
                     >
                       Donate
                     </button>
-                    
-                    <div *ngIf="showSuccessMessage" class="alert alert-success" role="alert">
-                      Donation Done Successfully
+
+                    <div
+                      *ngIf="showSuccessMessage"
+                      class="alert alert-success"
+                      role="alert"
+                    >
+                      Thank You For Your Kindness
                     </div>
                   </div>
                 </form>
